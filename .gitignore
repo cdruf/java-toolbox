@@ -1,6 +1,5 @@
 # Compiled class file
 *.class
-target/
 
 # Log file
 *.log
@@ -23,11 +22,11 @@ target/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-
-
 # IDE files
 .project
 .classpath
 .settings/org.eclipse.jdt.core.prefs
 .idea/
 *.iml
+
+
