@@ -36,25 +36,25 @@ public class Workforce {
                                                                                // a random action from A_t
 
     public Workforce() {
-        V = new HashMap<State, Double>();
-        VUpdateCounter = new HashMap<State, Integer>();
+        V = new HashMap<>();
+        VUpdateCounter = new HashMap<>();
         binomialLookup = new BinomialDistributionLookupTable();
     }
 
     void printInfo() {
         int actions = 1;
-        for (int i = 0; i < Ux.length; i++) {
-            actions = actions * (Ux[i] + 1);
+        for (int ux : Ux) {
+            actions += actions * (ux + 1);
         }
         System.out.println("Action space = " + actions);
         int states = 1;
-        for (int i = 0; i < Uz.length; i++) {
-            states = states * (Uz[i] + 1);
+        for (int j : Uz) {
+            states += states * (j + 1);
         }
         System.out.println("State space = " + states);
         int outcomes = 1;
-        for (int i = 0; i < Uz.length; i++) {
-            outcomes = outcomes * binomialLookup.p[Uz[i]].length;
+        for (int j : Uz) {
+            outcomes += outcomes * binomialLookup.p[j].length;
         }
         System.out.println("Outcome space <= " + outcomes);
     }
