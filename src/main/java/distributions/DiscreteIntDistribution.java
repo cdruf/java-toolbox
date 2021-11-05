@@ -9,12 +9,12 @@ import lombok.Getter;
 @Getter
 public class DiscreteIntDistribution {
 
-    int[] events;  // outcome space
-    double[] pdf;  // probabilities
-    double[] cdf; // cumulative probabilities
+    int[]    events; // outcome space
+    double[] pdf;    // probabilities
+    double[] cdf;    // cumulative probabilities
 
-    long seed;
-    Random random;
+    long     seed;
+    Random   random;
 
     public DiscreteIntDistribution(int[] events, double[] probabilities) {
         assert AH.min(probabilities) >= 0.0;
@@ -58,10 +58,6 @@ public class DiscreteIntDistribution {
         return 1.0;
     }
 
-    public int n_levels() {
-        return events.length;
-    }
-
     public int sample() {
         double a = random.nextDouble();
         for (int i = 0; i < cdf.length; i++) {
@@ -75,7 +71,7 @@ public class DiscreteIntDistribution {
     }
 
     public static void main(String[] args) {
-        DiscreteIntDistribution distr = new DiscreteIntDistribution(new int[]{0, 1, 2}, new double[]{0.1, 0.3, 0.6}, 1l);
+        DiscreteIntDistribution distr = new DiscreteIntDistribution(new int[] { 0, 1, 2 }, new double[] { 0.1, 0.3, 0.6 }, 1l);
         int[] result = new int[3];
         for (int i = 0; i < 1000; i++)
             result[distr.sample()]++;
