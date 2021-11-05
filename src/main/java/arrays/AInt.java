@@ -102,6 +102,23 @@ public class AInt implements Cloneable, Serializable {
      * @param to
      *            last index (inclusive).
      * @param val
+     *            the value to add.
+     * @param inplace
+     *            true, if this is modified, otherwise, a new array is created.
+     */
+    public void plus(int from, int to, int val, boolean inplace) {
+        if (inplace)
+            plus(from, to, val);
+        else
+            throw new Error("Not implemented");
+    }
+
+    /**
+     * @param from
+     *            1st index.
+     * @param to
+     *            last index (inclusive).
+     * @param val
      */
     public void plus(int from, int to, int val) {
         if (immutable) throw new Error("immutable");

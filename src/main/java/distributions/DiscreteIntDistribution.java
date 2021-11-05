@@ -58,6 +58,10 @@ public class DiscreteIntDistribution {
         return 1.0;
     }
 
+    public int n_levels() {
+        return events.length;
+    }
+
     public int sample() {
         double a = random.nextDouble();
         for (int i = 0; i < cdf.length; i++) {

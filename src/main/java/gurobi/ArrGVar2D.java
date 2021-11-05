@@ -1,9 +1,12 @@
 package gurobi;
 
 import arrays.AH;
-import gurobi.GRB.DoubleAttr;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
+
+import gurobi.GRB.DoubleAttr;
+
 
 public class ArrGVar2D {
 
@@ -26,9 +29,14 @@ public class ArrGVar2D {
         return ret;
     }
 
-    private GRBVar[][] a;
-    private int shift1;
-    private int shift2;
+    public static ArrGVar2D byIndices(int minInd1, int maxInd1, int minInd2, int maxInd2, GRBModel model, String name)
+            throws GRBException {
+        return new ArrGVar2D(maxInd1 - minInd1 + 1, maxInd2 - minInd2 + 1, minInd1, minInd2, model, name);
+    }
+
+    private final GRBVar[][] a;
+    private final int shift1;
+    private final int shift2;
 
     public ArrGVar2D(int l1, int l2, int shift1, int shift2) {
         a = new GRBVar[l1][l2];
@@ -38,6 +46,20 @@ public class ArrGVar2D {
 
     public ArrGVar2D(GRBVar[][] a, int shift1, int shift2) {
         this.a = a;
+        this.shift1 = shift1;
+        this.shift2 = shift2;
+    }
+
+    public ArrGVar2D(int l1, int l2, int shift1, int shift2, GRBModel model, String name) throws GRBException {
+        a = new GRBVar[l1][];
+        for (int i = 0; i < l1; i++) {
+            char[] types = new char[l2];
+            Arrays.fill(types, GRB.CONTINUOUS);
+            final int j = i;
+            String[] names = IntStream.range(shift2, shift2 + l2).mapToObj(
+                    x -> name + '_' + (shift1 + j) + ',' + x).toArray(size -> new String[l2]);
+            a[i] = model.addVars(null, null, null, types, names);
+        }
         this.shift1 = shift1;
         this.shift2 = shift2;
     }

@@ -7,12 +7,13 @@ import java.util.List;
 public class VMHelper {
 
     public static String getVMStats() {
-        String ret = "";
+        String ret = String.format("Working directory is %s\n", System.getProperty("user.dir"));
         ret += "OS architecture=" + System.getProperty("os.arch") + "\n";
         ret += "OS=" + System.getProperty("os.name") + "\n";
+        ret += "Java version=" + System.getProperty("java.version") + "\n";
         ret += "Java VM version=" + System.getProperty("java.vm.version") + "\n";
-        ret += "Java runtime name=" + System.getProperty("java.runtime.name") + "\n";
         ret += "Java VM name=" + System.getProperty("java.vm.name") + "\n";
+        ret += "Java runtime name=" + System.getProperty("java.runtime.name") + "\n";
         long maxMemory = Runtime.getRuntime().maxMemory();
         long totalMemory = Runtime.getRuntime().totalMemory();
         ret += "VM will try to use " + maxMemory / 1024 / 1024 + " MB\n";
