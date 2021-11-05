@@ -213,6 +213,4 @@
 	<properties>
 		<maven.test.jvmargs></maven.test.jvmargs>
 	</properties>
-
-
 </project>
