@@ -1,6 +1,7 @@
 package arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import util.MyMath;
 
@@ -68,7 +69,7 @@ public class AH {
     }
 
     public static String toString(Object[][] a, String startDelim, String delim, String endDelim, String startDelim2,
-            String delim2, String endDelim2) {
+                                  String delim2, String endDelim2) {
         if (a == null) return "null";
         if (a.length == 0) {
             return startDelim + endDelim;
@@ -81,7 +82,7 @@ public class AH {
     }
 
     public static String toString(int[][] a, String outerStartDelim, String outerDelim, String outerEndDelim,
-            String innerStartDelim, String innerDelim, String innerEndDelim) {
+                                  String innerStartDelim, String innerDelim, String innerEndDelim) {
         if (a == null) return "null";
         if (a.length == 0) {
             return outerStartDelim + outerEndDelim;
@@ -95,7 +96,7 @@ public class AH {
     }
 
     public static String toString(double[][] a, String startDelim, String delim, String endDelim, String startDelim2,
-            String delim2, String endDelim2) {
+                                  String delim2, String endDelim2) {
         if (a == null) return "null";
         if (a.length == 0) {
             return startDelim + endDelim;
@@ -108,7 +109,7 @@ public class AH {
     }
 
     public static String toString(boolean[][] a, String startDelim, String delim, String endDelim, String startDelim2,
-            String delim2, String endDelim2) {
+                                  String delim2, String endDelim2) {
         if (a == null) return "null";
         if (a.length == 0) {
             return startDelim + endDelim;
@@ -131,7 +132,7 @@ public class AH {
     }
 
     public static String toTableString(String rowHeader, int[] rowNames, String columnHeader, int[] colNames,
-            int[][] values) {
+                                       int[][] values) {
         String ret = rowHeader + "\\" + columnHeader + "|\t";
         int headerLength = rowHeader.length() + 1 + columnHeader.length();
 
@@ -196,8 +197,7 @@ public class AH {
     /* Parse */
 
     /**
-     * @param str
-     *            "[x, ... , y]" or "x, ... , y" or "x ... y"
+     * @param str "[x, ... , y]" or "x, ... , y" or "x ... y"
      */
     public static int[] parseInt(String str) {
         if (str.length() == 0) return new int[0];
@@ -250,7 +250,7 @@ public class AH {
     public static int[][] wrap(int[] a) {
         int[][] ret = new int[a.length][];
         for (int i = 0; i < a.length; i++)
-            ret[i] = new int[] { a[i] };
+            ret[i] = new int[]{a[i]};
         return ret;
     }
 
@@ -312,6 +312,18 @@ public class AH {
 
     /* Filling */
 
+    public static double[] repeat(double val, int n) {
+        double[] ret = new double[n];
+        Arrays.fill(ret, val);
+        return ret;
+    }
+
+    public static char[] repeat(char val, int n) {
+        char[] ret = new char[n];
+        Arrays.fill(ret, val);
+        return ret;
+    }
+
     public static void fill(double[] a, double val) {
         for (int i = 0; i < a.length; i++)
             a[i] = val;
@@ -337,9 +349,8 @@ public class AH {
 
     /**
      * Create int-array filled integers counting up from min to max.
-     * 
-     * @param max
-     *            inclusive
+     *
+     * @param max inclusive
      */
     public static int[] fill(int min, int max) {
         int[] ret = new int[max - min + 1];
@@ -815,13 +826,10 @@ public class AH {
     /* Combinations */
 
     /**
-     * 
-     * @param a
-     *            array with arrays that represent a n-tuple. For instance [[1][2]]
-     * @param b
-     *            array with elements. For instance [3,4]
+     * @param a array with arrays that represent a n-tuple. For instance [[1][2]]
+     * @param b array with elements. For instance [3,4]
      * @return array that contains all arrays of combinations of the elements in a and v. For instance
-     *         [[1,3][1,4],[1,4],[2,4]].
+     * [[1,3][1,4],[1,4],[2,4]].
      */
     public static int[][] combine(int[][] a, int[] b) {
         int[][] ret = new int[a.length * b.length][];
@@ -854,11 +862,9 @@ public class AH {
     /**
      * Create all combinations of the sets of integer that are defined by the upper bounds, whereas the
      * lower bounds are all 0.
-     * 
-     * @param lb
-     *            Lower bounds, for instance [0,0].
-     * @param ub
-     *            Upper bounds, for instance [1,2].
+     *
+     * @param lb Lower bounds, for instance [0,0].
+     * @param ub Upper bounds, for instance [1,2].
      * @return for instance [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]].
      */
     public static int[][] combineRecursive(int[] lb, int[] ub) {
@@ -890,9 +896,9 @@ public class AH {
     }
 
     public static void main(String[] args) {
-        int[] a1 = { 1, 2 };
+        int[] a1 = {1, 2};
         int[] a2 = {};
-        int[] a3 = { 5, 6 };
+        int[] a3 = {5, 6};
         System.out.println(AH.toString(concat(a1, a2, a3), "", ",", "") + "\n");
 
         boolean[][] a = new boolean[3][2];

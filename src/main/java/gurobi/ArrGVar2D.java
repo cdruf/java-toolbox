@@ -1,6 +1,9 @@
 package gurobi;
 
+import arrays.AH;
 import gurobi.GRB.DoubleAttr;
+
+import java.util.Arrays;
 
 public class ArrGVar2D {
 
@@ -8,9 +11,24 @@ public class ArrGVar2D {
         return new ArrGVar2D(maxInd1 - minInd1 + 1, maxInd2 - minInd2 + 1, minInd1, minInd2);
     }
 
+    public static ArrGVar2D byIndices(int minInd1, int maxInd1, int minInd2, int maxInd2, GRBModel m, double lb,
+                                      double ub, char type, String name) throws GRBException {
+        int n1 = maxInd1 - minInd1 + 1;
+        int n2 = maxInd2 - minInd2 + 1;
+        ArrGVar2D ret = new ArrGVar2D(n1, n2, minInd1, minInd2);
+        for (int i = minInd1; i <= maxInd1; i++) {
+            String[] names = new String[n2];
+            for (int j = minInd2; j <= maxInd2; j++)
+                names[j - minInd2] = name + "_" + i + "," + j;
+            ret.a[i - minInd1] = m.addVars(AH.repeat(lb, n2), AH.repeat(ub, n2), AH.repeat(0.0, n2),
+                    AH.repeat(type, n2), names);
+        }
+        return ret;
+    }
+
     private GRBVar[][] a;
-    private int        shift1;
-    private int        shift2;
+    private int shift1;
+    private int shift2;
 
     public ArrGVar2D(int l1, int l2, int shift1, int shift2) {
         a = new GRBVar[l1][l2];
