@@ -9,6 +9,13 @@ public class ListHelper {
         return l.get(l.size() - 1);
     }
 
+    public static <T> List<List<T>> getArrayList(int n) {
+        List<List<T>> ret = new ArrayList<>(n);
+        for (int i = 0; i < n; i++)
+            ret.add(new ArrayList<T>());
+        return ret;
+    }
+
     public static <T> List<List<List<List<T>>>> getArrayList(int d1, int d2, int d3) {
         List<List<List<List<T>>>> ret = new ArrayList<>(d1);
         for (int i = 0; i < d1; i++) {
